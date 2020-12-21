@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const AboutScreen = () => {
-  return <View>About Screen</View>;
+  return <Text>About Screen</Text>;
 };
 
 const styles = StyleSheet.create({

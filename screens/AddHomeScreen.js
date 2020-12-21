@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const AddHomeScreen = () => {
-  return <View>Add Home Screen</View>;
+  return <Text>Add Home Screen</Text>;
 };
 
 const styles = StyleSheet.create({

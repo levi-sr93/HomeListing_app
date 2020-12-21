@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const HomeListScreen = () => {
-  return <View>Home Listing Screen</View>;
+  return <Text>Home Listing Screen</Text>;
 };
 
 const styles = StyleSheet.create({

@@ -1,4 +1,6 @@
 import React from "react";
+import { MaterialIcons } from "@expo/vector-icons";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -41,7 +43,24 @@ function stackNavigator() {
 function AppNavigator() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        /*this props were passed by react navigation  */
+        screenOptions={({ route }) => ({
+          tabBarIcon: () => {
+            let iconName;
+            if (route.name === "Home") {
+              iconName = "home";
+            } else if (route.name === "About") {
+              iconName = "info";
+            }
+            return <MaterialIcons name={iconName} size={24} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray",
+        }}
+      >
         <Tab.Screen name="Home" component={stackNavigator} />
         <Tab.Screen name="About" component={AboutStackNavigator} />
       </Tab.Navigator>
