@@ -8,7 +8,7 @@ import Card from "../components/Card";
 const HomeListScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Card />
+      <Card navigation={navigation} />
       <FloatingAction
         position="right"
         animated={false}
