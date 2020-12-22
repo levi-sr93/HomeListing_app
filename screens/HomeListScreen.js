@@ -5,7 +5,7 @@ import { FloatingAction } from "react-native-floating-action";
 
 import Card from "../components/Card";
 
-const HomeListScreen = () => {
+const HomeListScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Card />
@@ -13,7 +13,7 @@ const HomeListScreen = () => {
         position="right"
         animated={false}
         showBackground={false}
-        onPressMain={() => console.log("button is pressed")}
+        onPressMain={() => navigation.navigate("AddHome")}
       />
     </View>
   );
