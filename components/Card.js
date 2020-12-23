@@ -7,26 +7,23 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Card = ({ navigation }) => {
+const Card = (props, { navigation }) => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate("HomeDetail")}>
       <View style={styles.card}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Modern 4-bedroom Mansion</Text>
+          <Text style={styles.title}>{props.title}</Text>
         </View>
         <View style={styles.imageContainer}>
-          <ImageBackground
-            style={styles.image}
-            source={require("../assets/images/mansao.jpeg")}
-          >
-            <Text style={styles.price}>$20.000,00</Text>
+          <ImageBackground style={styles.image} source={{ uri: props.image }}>
+            <Text style={styles.price}>{props.price}</Text>
             <View style={styles.year}>
-              <Text style={styles.yearText}>2020</Text>
+              <Text style={styles.yearText}>{props.yearBuilt}</Text>
             </View>
           </ImageBackground>
         </View>
         <View style={styles.description}>
-          <Text style={styles.descriptionText}>This is the description</Text>
+          <Text style={styles.descriptionText}>{props.description}</Text>
         </View>
       </View>
     </TouchableOpacity>

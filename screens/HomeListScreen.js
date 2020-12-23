@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 
 import { FloatingAction } from "react-native-floating-action";
 
@@ -21,7 +21,22 @@ const HomeListScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Card navigation={navigation} />
+      <FlatList
+        data={houses}
+        keyExtractor={(item) => item._id}
+        renderItem={({ item }) => (
+          <Card
+            navigation={navigation}
+            title={item.title}
+            address={item.address}
+            homeType={item.homeType}
+            description={item.description}
+            price={item.price}
+            image={item.image}
+            yearBuilt={item.yearBuilt}
+          />
+        )}
+      />
       <FloatingAction
         position="right"
         animated={false}
