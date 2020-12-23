@@ -3,13 +3,16 @@ import { View, Text, StyleSheet } from "react-native";
 
 import { FloatingAction } from "react-native-floating-action";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as houseAction from "../redux/actions/houseAction";
 
 import Card from "../components/Card";
 
 const HomeListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  //access data from state and taking the houses from house array
+  const { houses } = useSelector((state) => state.house);
 
   //dispatching the fetch action when the component renders
   useEffect(() => {
