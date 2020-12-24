@@ -9,7 +9,11 @@ import {
 
 const Card = (props) => {
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("HomeDetail")}>
+    <TouchableOpacity
+      onPress={() =>
+        props.navigation.navigate("HomeDetail", { houseId: props.id })
+      }
+    >
       <View style={styles.card}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
