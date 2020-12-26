@@ -10,9 +10,20 @@ import {
 } from "react-native";
 
 import { Formik } from "formik";
+import * as yup from "yup";
+
+//creating the validation schema for the form
+const formSchema = yup.object({
+  title: yup.string().required().min(3).max(50),
+  price: yup.number().required(),
+  yearBuilt: yup.number().required(),
+  image: yup.string().required(),
+  address: yup.string().required().min(10).max(50),
+  description: yup.string().required().min(10).max(50),
+  homeType: yup.string().required(),
+});
 
 const AddHomeScreen = () => {
-  const [title, setTitle] = useState("");
 
   return (
     <KeyboardAvoidingView
@@ -31,6 +42,7 @@ const AddHomeScreen = () => {
             address: "",
             description: "",
           }}
+          validationSchema={formSchema}
           onSubmit={(values) => {
             console.log(values);
           }}
@@ -43,7 +55,12 @@ const AddHomeScreen = () => {
                   style={styles.input}
                   onChangeText={props.handleChange("title")}
                   value={props.values.title}
+                  onBlur={props.handleBlur("title")}
                 />
+                {/* in case the validation fails here we have an error handling object provided by Formik*/}
+                <Text style={styles.error}>
+                  {props.touched.title && props.errors.title}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -52,7 +69,11 @@ const AddHomeScreen = () => {
                   style={styles.input}
                   onChangeText={props.handleChange("image")}
                   value={props.values.image}
+                  onBlur={props.handleBlur("image")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.image && props.errors.image}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -61,7 +82,11 @@ const AddHomeScreen = () => {
                   style={styles.input}
                   onChangeText={props.handleChange("homeType")}
                   value={props.values.homeType}
+                  onBlur={props.handleBlur("homeType")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.homeType && props.errors.homeType}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -71,7 +96,11 @@ const AddHomeScreen = () => {
                   onChangeText={props.handleChange("price")}
                   value={props.values.price}
                   keyboardType="numeric"
+                  onBlur={props.handleBlur("price")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.price && props.errors.price}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -81,7 +110,11 @@ const AddHomeScreen = () => {
                   onChangeText={props.handleChange("yearBuilt")}
                   value={props.values.yearBuilt}
                   keyboardType="numeric"
+                  onBlur={props.handleBlur("yearBuilt")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.yearBuilt && props.errors.yearBuilt}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -91,7 +124,11 @@ const AddHomeScreen = () => {
                   multiline
                   onChangeText={props.handleChange("address")}
                   value={props.values.address}
+                  onBlur={props.handleBlur("address")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.address && props.errors.address}
+                </Text>
               </View>
 
               <View style={styles.formGroup}>
@@ -101,7 +138,11 @@ const AddHomeScreen = () => {
                   multiline
                   onChangeText={props.handleChange("description")}
                   value={props.values.description}
+                  onBlur={props.handleBlur("description")}
                 />
+                <Text style={styles.error}>
+                  {props.touched.description && props.errors.description}
+                </Text>
               </View>
 
               <View style={styles.buttonContainer}>
@@ -136,6 +177,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+
+  error: {
+    color: "red",
   },
 });
 
