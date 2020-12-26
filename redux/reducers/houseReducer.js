@@ -14,10 +14,11 @@ export default function (state = INITIAL_STATE, action) {
       };
 
     case CREATE_HOUSES:
-      return {
-        ...state,
-        houses: state.houses.concat(action.payload),
-      };
+      console.log(action.payload);
+    return {
+      ...state,
+      houses: state.houses.concat(action.payload.data),
+    };
   }
 
   return state;

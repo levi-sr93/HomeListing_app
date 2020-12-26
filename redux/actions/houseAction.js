@@ -44,7 +44,7 @@ export const createHome = ({
     });
 
     const responseData = await response.json();
-    console.log(responseData);
+    // console.log(responseData);
 
     dispatch({
       type: CREATE_HOUSES,
