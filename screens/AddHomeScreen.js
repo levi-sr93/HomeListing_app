@@ -8,6 +8,7 @@ import {
   Button,
   KeyboardAvoidingView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 
 import { Formik } from "formik";
@@ -30,6 +31,16 @@ const formSchema = yup.object({
 const AddHomeScreen = () => {
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
     <KeyboardAvoidingView
     // behavior="padding"
@@ -49,12 +60,17 @@ const AddHomeScreen = () => {
           }}
           validationSchema={formSchema}
           onSubmit={(values) => {
+            setIsLoading(true);
             console.log(values);
             dispatch(houseAction.createHome(values))
-              .then(() => Alert.alert("Created Successfully"))
-              .catch(() =>
-                Alert.alert("An error occurred. Try Again", [{ text: "Ok" }])
-              );
+              .then(() => {
+                setIsLoading(false);
+                Alert.alert("Created Successfully");
+              })
+              .catch(() => {
+                setIsLoading(false);
+                Alert.alert("An error occurred. Try Again");
+              });
           }}
         >
           {(props) => (
@@ -191,6 +207,12 @@ const styles = StyleSheet.create({
 
   error: {
     color: "red",
+  },
+
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

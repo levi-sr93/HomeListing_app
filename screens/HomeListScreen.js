@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 
 import { FloatingAction } from "react-native-floating-action";
 
@@ -11,14 +17,34 @@ import Card from "../components/Card";
 const HomeListScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   //access data from state and taking the houses from house array
   const { houses } = useSelector((state) => state.house);
 
   //dispatching the fetch action when the component renders
   useEffect(() => {
-    dispatch(houseAction.fetchHouses());
+    setIsLoading(true);
+    dispatch(houseAction.fetchHouses())
+      .then(() => setIsLoading(false))
+      .catch(() => setIsLoading(false));
   }, [dispatch]);
 
+  if (isLoading) {
+    return (
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (houses.length === 0 && !isLoading) {
+    return (
+      <View style={styles.centered}>
+        <Text>No Home Found you could add one.</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <FlatList
@@ -51,6 +77,11 @@ const HomeListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
